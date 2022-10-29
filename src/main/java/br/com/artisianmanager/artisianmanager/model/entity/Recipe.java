@@ -3,8 +3,6 @@ package br.com.artisianmanager.artisianmanager.model.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Document
@@ -17,8 +15,8 @@ public class Recipe {
     private String unit;
 
     private int time;
-    private String registerDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
-    private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+    private String registerDate;
+    private String updateDate;
     private ArrayList<Ingredient> ingredients;
 
     // Getters ans Setters
@@ -74,6 +72,6 @@ public class Recipe {
         return updateDate;
     }
     public void setUpdateDate(String updateDate) {
-        this.updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+        this.updateDate = updateDate;
     }
 }
