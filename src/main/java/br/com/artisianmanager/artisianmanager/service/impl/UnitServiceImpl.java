@@ -20,6 +20,17 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    public <Optional> java.util.Optional<Unit> findById(String id) {
+        return unitRepository.findById(id);
+    }
+
+    @Override
+    public Boolean existsById(String id) {
+        return this.unitRepository.existsById(id);
+    }
+
+
+    @Override
     public Unit save(Unit unit) {
         return unitRepository.save(unit);
     }
