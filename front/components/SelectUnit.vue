@@ -4,12 +4,17 @@
     <select
       id="raw-unit"
       v-model="unit"
-      class="form-select"
+      class="form-select select"
       name="raw-unit"
       aria-describedby="unitHelp"
     >
       <option selected value="0">Escolha uma opção</option>
-      <option v-for="data in units" :key="data._id" :value="data.symbol">
+      <option
+        v-for="data in units"
+        :key="data._id"
+        :value="data.symbol"
+        class="opacity-25"
+      >
         ({{ data.symbol }}) {{ data.name }}
       </option>
     </select>

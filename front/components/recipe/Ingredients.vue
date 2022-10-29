@@ -1,11 +1,11 @@
 <template>
   <div class="row align-items-end">
-    <div class="col-7">
+    <div class="col-6">
       <label for="ingredient-name" class="form-label">Ingredientes</label>
       <select
         id="ingredient-name"
         v-model="ingredient"
-        class="form-select"
+        class="form-select select"
         name="ingredient-name"
       >
         <option value="0" selected>Escolha uma opção</option>
@@ -24,7 +24,7 @@
         class="form-control"
       />
     </div>
-    <div class="col-1">
+    <div class="col-2">
       <label for="ingredient.unit" class="form-label">Unidade</label>
       <input
         id="ingredient-unit"
@@ -34,7 +34,7 @@
     </div>
     <div class="col-2 justify-self-center text-center">
       <input
-        class="btn btn-primary"
+        class="btn btn-send btn-sm justify-content-center"
         type="button"
         value="Inserir"
         @click="insertIngredient()"

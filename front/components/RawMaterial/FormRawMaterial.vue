@@ -22,7 +22,11 @@
     </div>
     <SelectUnit />
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary" @click="insertRawMaterial">
+      <button
+        type="submit"
+        class="btn btn-send justify-content-center"
+        @click="insertRawMaterial"
+      >
         Enviar
       </button>
     </div>

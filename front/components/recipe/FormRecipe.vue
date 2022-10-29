@@ -60,7 +60,11 @@
     </div>
     <div class="row mb-3 mt-3 justify-content-center text-center">
       <div class="col">
-        <button type="submit" class="btn btn-primary" @click="insertRecipe">
+        <button
+          type="submit"
+          class="btn btn-send justify-content-center"
+          @click="insertRecipe"
+        >
           Enviar
         </button>
       </div>

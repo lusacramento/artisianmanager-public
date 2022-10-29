@@ -1,5 +1,5 @@
 <template>
-  <table id="table-recipe" class="table table-striped">
+  <table id="table-recipe" class="table table-sm">
     <caption>
       {{
         counter
@@ -18,10 +18,10 @@
         <td>{{ data.name }}</td>
         <td class="text-center">{{ data.portions }} {{ data.unit }}</td>
         <td class="text-center">
-          <button class="btn btn-warning m-1" @click="setRecipe(index)">
+          <button class="btn btn-sm btn-alter m-1" @click="setRecipe(index)">
             Alterar</button
           ><button
-            class="btn btn-danger m-1"
+            class="btn btn-sm btn-delete m-1"
             @click="deleteRecipe(data, index)"
           >
             Excluir

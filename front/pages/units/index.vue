@@ -2,11 +2,11 @@
   <div>
     <h1>Unidade</h1>
     <div class="container-fluid">
-      <div class="row d-flex">
-        <div class="col-12 col-lg-4">
+      <div class="row d-flex justify-content-around align-items-center">
+        <div class="col-12 col-lg-2">
           <FormUnit />
         </div>
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-7">
           <TableUnit />
         </div>
       </div>
@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import TableUnit from '~/components/Unit/TableUnit.vue'
-import FormUnit from '~/components/Unit/FormUnit.vue'
+import TableUnit from '~/components/unit/TableUnit.vue'
+import FormUnit from '~/components/unit/FormUnit.vue'
 export default {
   name: 'UnitPage',
   components: { FormUnit, TableUnit },

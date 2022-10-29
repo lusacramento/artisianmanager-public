@@ -1,6 +1,6 @@
 <template>
-  <table class="table table-striped">
-    <caption class="text-end mx-5">
+  <table class="table table-sm">
+    <caption>
       {{
         counter
       }}
@@ -19,15 +19,13 @@
         <td class="text-center">{{ data.symbol }}</td>
         <td class="text-center">
           <button
-            id="buttonAlter"
-            class="buttons btn btn-warning justify-content-center"
+            class="btn btn-alter btn-sm justify-content-center"
             @click="setUnit(data)"
           >
             Alterar
           </button>
           <button
-            id="buttonDelete"
-            class="buttons btn btn-danger justify-content-center"
+            class="btn btn-sm btn-delete justify-content-center"
             @click="deleteUnit(data, index)"
           >
             Remover
@@ -72,12 +70,4 @@ export default {
 }
 </script>
 
-<style>
-.buttons {
-  width: 80px;
-  height: 35px;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
-</style>
+<style></style>
