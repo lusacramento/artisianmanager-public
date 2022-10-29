@@ -3,9 +3,6 @@ package br.com.artisianmanager.artisianmanager.model.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @Document
 public class RawMaterial {
 
@@ -14,8 +11,8 @@ public class RawMaterial {
         private String name;
         private String description;
         private String unit;
-        private String registerDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
-        private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+        private String registerDate;
+        private String updateDate;
 
         // Getters ans Setters
         public String get_id() {
@@ -52,6 +49,6 @@ public class RawMaterial {
                 return updateDate;
         }
         public void setUpdateDate(String updateDate) {
-                this.updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+                this.updateDate = updateDate;
         }
 }
