@@ -12,8 +12,8 @@ public class Unit {
     private String _id;
     private String name;
     private String symbol;
-    private String registerDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
-    private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+    private String registerDate;
+    private String updateDate;
 
     // Getters and Setters
     public String get_id() {
@@ -44,6 +44,6 @@ public class Unit {
         return updateDate;
     }
     public void setUpdateDate(String updateDate) {
-        this.updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+        this.updateDate = updateDate;
     }
 }
