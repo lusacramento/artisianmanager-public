@@ -2,8 +2,8 @@
   <div>
     <h1>Matéria Prima</h1>
     <div class="container-fluid">
-      <div class="row d-flex">
-        <div class="col-12 col-lg-4">
+      <div class="row d-flex justify-content-around align-items-center">
+        <div class="col-12 col-lg-3">
           <FormRawMaterial />
         </div>
         <div class="col-12 col-lg-8">

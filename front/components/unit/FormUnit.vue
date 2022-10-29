@@ -21,7 +21,11 @@
       />
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-primary" @click="insertUnit">
+      <button
+        type="submit"
+        class="btn btn-send justify-content-center"
+        @click="insertUnit"
+      >
         Enviar
       </button>
     </div>

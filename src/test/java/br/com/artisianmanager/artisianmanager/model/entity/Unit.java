@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Document
 public class Unit {
@@ -12,8 +11,11 @@ public class Unit {
     private String _id;
     private String name;
     private String symbol;
-    private String registerDate;
-    private String updateDate;
+
+    private LocalDateTime registerDate;
+    private LocalDateTime updateDate;
+    // private String registerDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
+    // private String updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
 
     // Getters and Setters
     public String get_id() {
@@ -34,16 +36,17 @@ public class Unit {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
-    public String getRegisterDate() {
+    public LocalDateTime getRegisterDate() {
         return registerDate;
     }
-    public void setRegisterDate(String registerDate) {
+    public void setRegisterDate(LocalDateTime registerDate) {
         this.registerDate = registerDate;
     }
-    public String getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
+       // this.updateDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")).toString();
         this.updateDate = updateDate;
     }
 }

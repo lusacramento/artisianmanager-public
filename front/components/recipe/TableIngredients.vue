@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-striped">
+    <table class="table table-sm">
       <caption>
         {{
           count
@@ -20,8 +20,7 @@
           <td class="text-center">{{ data.quantity }} {{ data.unit }}.</td>
           <td class="text-center">
             <button
-              id="buttonDelete"
-              class="text-center justify-content-center btn btn-danger"
+              class="btn btn-delete btn-sm text-center justify-content-center"
               @click="removeIngredient(index)"
             >
               Remover

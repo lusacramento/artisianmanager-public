@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped">
+  <table class="table table-sm">
     <caption>
       {{
         counter
@@ -22,15 +22,13 @@
 
         <td class="text-center">
           <button
-            id="buttonAlter"
-            class="buttons btn btn-warning justify-content-center"
+            class="btn btn-alter btn-sm justify-content-center"
             @click="setRawMaterial(data)"
           >
             Alterar
           </button>
           <button
-            id="buttonExcluir"
-            class="btn btn-danger buttons"
+            class="btn btn-sm btn-delete justify-content-center"
             @click="deleteRawMaterial(data, index)"
           >
             Remover
@@ -74,12 +72,4 @@ export default {
 }
 </script>
 
-<style>
-.buttons {
-  width: 80px;
-  height: 35px;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
-</style>
+<style></style>

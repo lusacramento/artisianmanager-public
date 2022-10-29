@@ -42,11 +42,13 @@ export const actions = {
 
   async postUnit({ state, commit }) {
     // Validating data
-    if (state.unit.name !== '' && state.unit.symbol !== '')
-      await this.$axios.$post(
-        'http://localhost:8080/api/units/insert',
-        state.unit
-      )
+
+    const response = await this.$axios.$post(
+      'http://localhost:8080/api/units/insert',
+      state.unit
+    )
+    if (!response) alert('Erro ao inserir no banco de dados')
+    // eslint-disable-next-line no-console
   },
 
   async deleteUnit({ state, commit }, data) {
