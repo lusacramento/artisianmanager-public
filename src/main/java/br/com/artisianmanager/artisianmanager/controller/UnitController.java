@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -18,13 +19,19 @@ public class UnitController {
     @Autowired
     private UtilsService utilsService;
 
-     @GetMapping("api/units")
+    @GetMapping("/api/units")
      public List<Unit> findAll(){
         return this.unitService.findAll();
     }
 
-    @PostMapping("api/units/insert")
+    @RequestMapping(value = "/api/units/{_id}", method = RequestMethod.GET)
+    public Optional<Unit> findById(@PathVariable("_id")String _id){
+         return this.unitService.findById(_id);
+    }
+
+    @PostMapping("api/units")
     public Unit save(@RequestBody Unit unit){
+         // Validations
          if(this.utilsService.verifyNullField(unit.getName()) || this.utilsService.verifyNullField(unit.getSymbol())){
              return null;
          }
@@ -50,8 +57,9 @@ public class UnitController {
          }
     }
 
-    @DeleteMapping("api/units/delete")
-    public boolean deleteById(String _id){
+    @DeleteMapping("/api/units/{_id}")
+    @ResponseBody
+    public boolean deleteById(@PathVariable String _id){
          return this.unitService.deleteById(_id);
     }
 }
