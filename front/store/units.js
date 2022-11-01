@@ -44,7 +44,7 @@ export const actions = {
     // Validating data
 
     const response = await this.$axios.$post(
-      'http://localhost:8080/api/units/insert',
+      'http://localhost:8080/api/units/',
       state.unit
     )
     if (!response) alert('Erro ao inserir no banco de dados')
@@ -53,7 +53,7 @@ export const actions = {
 
   async deleteUnit({ state, commit }, data) {
     const isDeleted = await this.$axios.$delete(
-      `http://localhost:8080/api/units/delete?_id=${data.unit._id}`
+      `http://localhost:8080/api/units/${data.unit._id}`
     )
     isDeleted
       ? commit('deleteUnit', data.position)
