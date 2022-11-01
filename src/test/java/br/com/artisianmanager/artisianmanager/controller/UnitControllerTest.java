@@ -27,7 +27,10 @@ class UnitControllerTest {
     }
 
     @Test
-    void save() {
+    void findById() throws Exception {
+        String id = "111";
+        mockMvc.perform(get("/api/units/" + id))
+                .andExpect(status().isOk());
     }
 
     @Test
