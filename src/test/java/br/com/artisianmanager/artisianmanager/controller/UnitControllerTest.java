@@ -22,7 +22,19 @@ class UnitControllerTest {
     MockMvc mockMvc;
     @Test
     void findAll() throws Exception {
-        mockMvc.perform(get("api/units"))
+        mockMvc.perform(get("/api/units"))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    void save()  throws Exception{
+        setUp();
+        Unit unity = unit.setUnit();
+
+        mockMvc.perform(post("/api/units")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(unity)))
                 .andExpect(status().isOk());
     }
 
