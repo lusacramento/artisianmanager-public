@@ -1,5 +1,6 @@
 package br.com.artisianmanager.artisianmanager.model.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 @Document
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Recipe {
     @Id
+    @EqualsAndHashCode.Include
     private String _id;
     private String name;
     private String instructions;

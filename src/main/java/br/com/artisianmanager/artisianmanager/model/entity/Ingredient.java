@@ -1,13 +1,16 @@
 package br.com.artisianmanager.artisianmanager.model.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Ingredient {
     @Id
+    @EqualsAndHashCode.Include
     private String _id;
     private String name;
     private int quantity;
