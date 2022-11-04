@@ -1,5 +1,8 @@
 package br.com.artisianmanager.artisianmanager.service.impl;
 
+import br.com.artisianmanager.artisianmanager.domain.exception.BusinessException;
+import br.com.artisianmanager.artisianmanager.domain.exception.EntityNotFoundException;
+import br.com.artisianmanager.artisianmanager.domain.exception.EntityNotModifiedException;
 import br.com.artisianmanager.artisianmanager.model.entity.Unit;
 import br.com.artisianmanager.artisianmanager.repository.UnitRepository;
 import br.com.artisianmanager.artisianmanager.service.UnitService;
@@ -34,6 +37,13 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     public Unit save(Unit unit) {
+
+        // Verify if exist for name before to persist.
+        Unit unitResponse = unitRepository.queryFirstByName(unit.getName(), unit);
+        System.out.println("Unit response: " + unitResponse);
+        if(unitResponse != null)
+            throw new EntityNotModifiedException("Já existe unidade com o nome " + unit.getName() + ".");
+
         return unitRepository.save(unit);
     }
 
