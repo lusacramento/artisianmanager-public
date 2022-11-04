@@ -4,6 +4,7 @@ import br.com.artisianmanager.artisianmanager.model.entity.Unit;
 import br.com.artisianmanager.artisianmanager.service.UnitService;
 import br.com.artisianmanager.artisianmanager.service.UtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,8 +27,10 @@ public class UnitController {
     }
 
     @RequestMapping(value = "/api/units/{_id}", method = RequestMethod.GET)
-    public Optional<Unit> findById(@PathVariable("_id")String _id){
-         return this.unitService.findById(_id);
+    public ResponseEntity<Unit> findById(@PathVariable("_id")String _id){
+         return this.unitService.findById(_id)
+                 .map((ResponseEntity::ok))
+                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("api/units")

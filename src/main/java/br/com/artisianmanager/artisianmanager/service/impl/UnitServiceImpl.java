@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UnitServiceImpl implements UnitService {
@@ -20,9 +21,10 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public <Optional> java.util.Optional<Unit> findById(String id) {
+    public Optional<Unit> findById(String id) {
         return unitRepository.findById(id);
     }
+
 
     @Override
     public Boolean existsById(String id) {
