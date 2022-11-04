@@ -42,4 +42,9 @@ public class RawMaterialServiceImpl implements RawMaterialService {
             return false;
         }
     }
+
+    @Override
+    public boolean existsById(String id) {
+        return this.rawMaterialRepository.existsById(id);
+    }
 }

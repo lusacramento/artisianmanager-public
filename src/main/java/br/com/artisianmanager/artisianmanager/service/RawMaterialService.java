@@ -12,4 +12,6 @@ public interface RawMaterialService {
     public Optional<RawMaterial> findById(String _id);
     public RawMaterial save(RawMaterial rawmaterial);
     public boolean deleteById(String _id);
+
+    boolean existsById(String id);
 }
