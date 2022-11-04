@@ -9,8 +9,12 @@ import java.util.Optional;
 @Service
 public interface RecipeService {
     public List<Recipe> findAll();
+
     Recipe save(Recipe recipe);
 
     public boolean deleteById(String _id);
 
     Optional<Recipe> findById(String id);
+
+    boolean existsById(String id);
+}
