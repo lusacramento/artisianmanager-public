@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UnitRepository extends MongoRepository<Unit, String> {
 
-    Unit queryFirstByName(String name, Unit unit);
+    boolean queryFirstByName(String name);
 }
