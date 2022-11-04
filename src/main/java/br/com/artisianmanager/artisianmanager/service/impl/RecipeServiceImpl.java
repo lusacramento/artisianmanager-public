@@ -1,6 +1,5 @@
 package br.com.artisianmanager.artisianmanager.service.impl;
 
-import br.com.artisianmanager.artisianmanager.model.entity.RawMaterial;
 import br.com.artisianmanager.artisianmanager.model.entity.Recipe;
 import br.com.artisianmanager.artisianmanager.repository.RecipeRepository;
 import br.com.artisianmanager.artisianmanager.service.RecipeService;
@@ -8,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RecipeServiceImpl implements RecipeService {
     @Autowired
@@ -32,6 +33,16 @@ public class RecipeServiceImpl implements RecipeService {
             new IllegalArgumentException("Não encontrado!");
             return false;
         }
+    }
+
+    @Override
+    public Optional<Recipe> findById(String id) {
+        return this.recipeRepository.findById(id);
+    }
+
+    @Override
+    public boolean existsById(String id) {
+        return this.recipeRepository.existsById(id);
     }
 
 }
