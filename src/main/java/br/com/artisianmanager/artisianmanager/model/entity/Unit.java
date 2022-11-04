@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @Document
@@ -15,7 +17,11 @@ public class Unit {
     @EqualsAndHashCode.Include
     private String _id;
     private String name;
+
+    @NotBlank
     private String symbol;
+
     private String registerDate;
+
     private String updateDate;
 }

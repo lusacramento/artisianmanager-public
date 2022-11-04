@@ -6,6 +6,7 @@ import br.com.artisianmanager.artisianmanager.service.UtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class UnitController {
     }
 
     @PostMapping("api/units")
-    public Unit save(@RequestBody Unit unit){
+    public Unit save(@RequestBody @Valid Unit unit){
          // Validations
          if(this.utilsService.verifyNullField(unit.getName()) || this.utilsService.verifyNullField(unit.getSymbol())){
              return null;

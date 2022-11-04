@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -12,10 +14,18 @@ public class Ingredient {
     @Id
     @EqualsAndHashCode.Include
     private String _id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private int quantity;
+
+    @NotBlank
     private String unit;
+
     private String registerDate;
+
     private String updateDate;
 
     // Getters ans Setters
