@@ -8,6 +8,7 @@ import br.com.artisianmanager.artisianmanager.repository.UnitRepository;
 import br.com.artisianmanager.artisianmanager.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,12 +53,8 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public boolean deleteById(String _id) {
-        try {
+    @Transactional
+    public void deleteById(String _id) {
             unitRepository.deleteById(_id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }

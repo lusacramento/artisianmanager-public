@@ -54,7 +54,12 @@ public class UnitController {
 
     @DeleteMapping("/{_id}")
     @ResponseBody
-    public boolean deleteById(@PathVariable String _id){
-         return this.unitService.deleteById(_id);
+    public ResponseEntity<Void> deleteById(@PathVariable String _id){
+        if(!unitService.existsById(_id))
+            return ResponseEntity.notFound().build();
+
+        unitService.deleteById(_id);
+
+        return ResponseEntity.noContent().build();
     }
 }

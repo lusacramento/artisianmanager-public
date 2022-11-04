@@ -18,6 +18,6 @@ public interface UnitService {
 
     Unit save(Unit unit);
 
-    boolean deleteById(String _id);
+    void deleteById(String _id);
 
 }
