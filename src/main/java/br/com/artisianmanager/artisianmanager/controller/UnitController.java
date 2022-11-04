@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
+@RequestMapping("/api/units")
 public class UnitController {
 
     @Autowired
@@ -21,47 +22,24 @@ public class UnitController {
     @Autowired
     private UtilsService utilsService;
 
-    @GetMapping("/api/units")
+    @GetMapping
      public List<Unit> findAll(){
         return this.unitService.findAll();
     }
 
-    @RequestMapping(value = "/api/units/{_id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{_id}")
     public ResponseEntity<Unit> findById(@PathVariable("_id")String _id){
          return this.unitService.findById(_id)
                  .map((ResponseEntity::ok))
                  .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("api/units")
+    @PostMapping
     public Unit save(@RequestBody @Valid Unit unit){
-         // Validations
-         if(this.utilsService.verifyNullField(unit.getName()) || this.utilsService.verifyNullField(unit.getSymbol())){
-             return null;
-         }
-         else {
-
-             // verify if exists id
-             boolean isExistUnit = false;
-             if (unit.get_id() != null) {
-                 isExistUnit = this.unitService.existsById(unit.get_id());
-             }
-
-             // Case exist the id, don't set new date in the register date
-             if (isExistUnit) {
-                 unit.setRegisterDate(this.unitService.findById(unit.get_id()).orElse(null).getRegisterDate());
-
-             } else {
-                 unit.setRegisterDate(this.utilsService.getDate());
-             }
-
-             unit.setUpdateDate(this.utilsService.getDate());
-
-             return this.unitService.save(unit);
-         }
+          return this.unitService.save(unit);
     }
 
-    @DeleteMapping("/api/units/{_id}")
+    @DeleteMapping("/{_id}")
     @ResponseBody
     public boolean deleteById(@PathVariable String _id){
          return this.unitService.deleteById(_id);
