@@ -1,7 +1,11 @@
 package br.com.artisianmanager.artisianmanager.model.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+@Getter
+@Setter
 public class Ingredient {
     @Id
     private String _id;
