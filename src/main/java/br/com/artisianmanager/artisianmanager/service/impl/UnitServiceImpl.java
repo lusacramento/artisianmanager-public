@@ -28,6 +28,11 @@ public class UnitServiceImpl implements UnitService {
         return unitRepository.findById(id);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        return unitRepository.queryFirstByName(name);
+    }
+
 
     @Override
     public Boolean existsById(String id) {
@@ -39,9 +44,8 @@ public class UnitServiceImpl implements UnitService {
     public Unit save(Unit unit) {
 
         // Verify if exist for name before to persist.
-        Unit unitResponse = unitRepository.queryFirstByName(unit.getName(), unit);
-        System.out.println("Unit response: " + unitResponse);
-        if(unitResponse != null)
+        boolean existByName = unitRepository.queryFirstByName(unit.getName());
+        if(!existByName)
             throw new EntityNotModifiedException("Já existe unidade com o nome " + unit.getName() + ".");
 
         return unitRepository.save(unit);

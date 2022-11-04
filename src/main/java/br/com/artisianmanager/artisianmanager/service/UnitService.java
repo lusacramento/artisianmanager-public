@@ -12,9 +12,12 @@ public interface UnitService {
 
     Optional<Unit> findById(String id);
 
+    boolean existsByName(String name);
+
     Boolean existsById(String id);
 
     Unit save(Unit unit);
 
     boolean deleteById(String _id);
+
 }

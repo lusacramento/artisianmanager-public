@@ -39,6 +39,19 @@ public class UnitController {
           return this.unitService.save(unit);
     }
 
+    @PutMapping
+    public ResponseEntity<Unit> alter(@Valid @PathVariable String _id, @RequestBody @Valid Unit unit){
+        if(!unitService.existsByName(unit.getName())){
+            return ResponseEntity.notFound().build();
+        }
+
+        unit.set_id(_id);
+        unit.setUpdateDate(utilsService.getDate());
+
+        unit = unitService.save(unit);
+        return ResponseEntity.ok(unit);
+    }
+
     @DeleteMapping("/{_id}")
     @ResponseBody
     public boolean deleteById(@PathVariable String _id){
