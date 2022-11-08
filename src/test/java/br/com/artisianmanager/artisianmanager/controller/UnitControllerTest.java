@@ -27,43 +27,50 @@ class UnitControllerTest {
     @Autowired
     UnitController unitController;
 
-    UnitTest unit;
+    UnitTest unitTest;
+
+    Unit unit;
     @BeforeEach
     void setUp() {
-        this.unit = new UnitTest();
+        this.unitTest = new UnitTest();
+    }
+    @Test
+    void Crud() throws Exception {
+        save();
+        findAll();
+        findById();
+        deleteById();
     }
 
-
     @Test
+    void save()  throws Exception{
+        setUp();
+        this.unit = unitTest.setUnit();
+
+        mockMvc.perform(post("/api/units")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(this.unit)))
+                .andExpect(status().isCreated());
+    }
+
     void findAll() throws Exception {
         mockMvc.perform(get("/api/units"))
                 .andExpect(status().isOk());
     }
 
-
-    @Test
-    void save()  throws Exception{
-        setUp();
-        Unit unity = unit.setUnit();
-
-        mockMvc.perform(post("/api/units")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(unity)))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     void findById() throws Exception {
-        String id = "111";
+        this.unit = unitTest.setUnit();
+        String id = this.unit.get_id();
+
         mockMvc.perform(get("/api/units/" + id))
                 .andExpect(status().isOk());
     }
 
-    @Test
     void deleteById() throws Exception{
-        String id = "111";
+        this.unit = unitTest.setUnit();
+        String id = this.unit.get_id();
         mockMvc.perform(delete("/api/units/" + id).contentType("application/json")
                         .accept("application/json"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 }
