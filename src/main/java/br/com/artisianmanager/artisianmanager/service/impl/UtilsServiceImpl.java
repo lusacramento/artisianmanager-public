@@ -8,10 +8,14 @@ import java.time.OffsetDateTime;
 @Service
 public class UtilsServiceImpl implements UtilsService {
 
-    String datePattern = "dd-MM-yyyy HH:mm:ss";
 
     @Override
     public String getNewDate() {
         return OffsetDateTime.now().toString();
+    }
+
+    @Override
+    public OffsetDateTime dateParseString(String date) {
+        return OffsetDateTime.parse(date);
     }
 }
