@@ -12,12 +12,17 @@ public interface UnitService {
 
     Optional<Unit> findById(String id);
 
-    boolean existsByName(String name);
+    Unit findByName(String name, Unit unit);
 
-    Boolean existsById(String id);
+    boolean existsById(String id);
 
     Unit save(Unit unit);
 
+    List<Unit> saveMany(List<Unit> units);
+
+    Unit alter(Unit unit);
+
     void deleteById(String _id);
 
+    void deleteAll();
 }
