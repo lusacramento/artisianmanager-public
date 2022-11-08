@@ -15,6 +15,10 @@ export const mutations = {
     state.units = value
   },
 
+  pushUnit(state, value) {
+    state.units.push(value)
+  },
+
   setUnit(state, value) {
     state.unit = value
   },
@@ -36,28 +40,26 @@ export const mutations = {
 export const actions = {
   // Database Operations
   async getUnits({ state, commit }) {
-    const response = await this.$axios.$get('http://localhost:8080/api/units/')
-    commit('setUnits', response)
+    if (state.units.length === 0) {
+      const response = await this.$axios.$get(
+        'http://localhost:8080/api/units/'
+      )
+      commit('setUnits', response)
+    }
   },
 
   async postUnit({ state, commit }) {
-    // Validating data
+    await this.$axios.post('http://localhost:8080/api/units/', state.unit)
 
-    const response = await this.$axios.$post(
-      'http://localhost:8080/api/units/',
-      state.unit
-    )
-    if (!response) alert('Erro ao inserir no banco de dados')
-    // eslint-disable-next-line no-console
+    commit('pushUnit', state.unit)
   },
 
   async deleteUnit({ state, commit }, data) {
-    const isDeleted = await this.$axios.$delete(
+    await this.$axios.$delete(
       `http://localhost:8080/api/units/${data.unit._id}`
     )
-    isDeleted
-      ? commit('deleteUnit', data.position)
-      : alert('Erro ao apagar dado')
+
+    commit('deleteUnit', data.position)
   },
 
   // Store operations
