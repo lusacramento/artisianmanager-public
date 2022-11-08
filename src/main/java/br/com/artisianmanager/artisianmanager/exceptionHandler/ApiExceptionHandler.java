@@ -1,8 +1,7 @@
 package br.com.artisianmanager.artisianmanager.exceptionHandler;
 
-import br.com.artisianmanager.artisianmanager.domain.exception.BusinessException;
-import br.com.artisianmanager.artisianmanager.domain.exception.EntityNotFoundException;
-import br.com.artisianmanager.artisianmanager.domain.exception.EntityNotModifiedException;
+import br.com.artisianmanager.artisianmanager.domain.exception.BadRequestException;
+import br.com.artisianmanager.artisianmanager.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -30,56 +29,43 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        List<Problem.Campo> campos = new ArrayList<>();
+        List<Problem.FieldProblem> fields = new ArrayList<>();
 
         for(ObjectError error : ex.getBindingResult().getAllErrors()){
-        String nome = ((FieldError) error).getField();
-        String mensagem = messageSource.getMessage(error, LocaleContextHolder.getLocale());
-        campos.add(new Problem.Campo(nome, mensagem));
+        String name = ((FieldError) error).getField();
+        String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+        fields.add(new Problem.FieldProblem(name, message));
         }
 
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDataHora(OffsetDateTime.now());
-        problem.setTitulo("Um ou mais campos estão inválidos! Faça o preenchimento correto e tente novamente.");
-        problem.setCampos(campos);
+        problem.setDateTime(OffsetDateTime.now());
+        problem.setTitle("Um ou mais campos estão inválidos! Faça o preenchimento correto e tente novamente.");
+        problem.setFields(fields);
 
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
     @ExceptionHandler
-    public ResponseEntity<Object> handleNegocio(BusinessException ex, WebRequest request){
+    public ResponseEntity<Object> handleBadRequest(BadRequestException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDataHora(OffsetDateTime.now());
-        problem.setTitulo(ex.getMessage());
+        problem.setDateTime(OffsetDateTime.now());
+        problem.setTitle(ex.getMessage());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 
     }
     @ExceptionHandler
-    public ResponseEntity<Object> handleEntidadeNaoEncontrada(EntityNotFoundException ex, WebRequest request){
+    public ResponseEntity<Object> handleNotFound(NotFoundException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.NOT_FOUND;
         Problem problem = new Problem();
         problem.setStatus(status.value());
-        problem.setDataHora(OffsetDateTime.now());
-        problem.setTitulo(ex.getMessage());
-
-        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<Object> handleEntityNotModified(EntityNotModifiedException ex, WebRequest request){
-
-        HttpStatus status = HttpStatus.NOT_MODIFIED;
-        Problem problem = new Problem();
-        problem.setStatus(status.value());
-        problem.setDataHora(OffsetDateTime.now());
-        problem.setTitulo(ex.getMessage());
+        problem.setDateTime(OffsetDateTime.now());
+        problem.setTitle(ex.getMessage());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 
