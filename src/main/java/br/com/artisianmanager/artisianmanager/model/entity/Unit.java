@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -16,6 +17,8 @@ public class Unit {
     @Id
     @EqualsAndHashCode.Include
     private String _id;
+
+    @NotBlank
     private String name;
 
     @NotBlank
@@ -25,3 +28,4 @@ public class Unit {
 
     private String updateDate;
 }
+
