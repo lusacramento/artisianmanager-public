@@ -13,14 +13,14 @@ import java.util.List;
 @Setter
 public class Problem {
     private Integer status;
-    private OffsetDateTime dataHora;
-    private String titulo;
-    private List<Campo> campos;
+    private OffsetDateTime dateTime;
+    private String title;
+    private List<FieldProblem> fields;
 
     @AllArgsConstructor
     @Getter
-    public static class Campo {
-        private String nome;
-        private String mensagem;
+    public static class FieldProblem {
+        private String name;
+        private String message;
     }
 }
