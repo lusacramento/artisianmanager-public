@@ -8,10 +8,22 @@ import java.util.Optional;
 
 @Service
 public interface RawMaterialService {
-    public List<RawMaterial> findAll();
-    public Optional<RawMaterial> findById(String _id);
-    public RawMaterial save(RawMaterial rawmaterial);
-    public boolean deleteById(String _id);
+
+    List<RawMaterial> findAll();
+
+    Optional<RawMaterial> findById(String _id);
+
+    RawMaterial findByName(String name, RawMaterial rawMaterial);
 
     boolean existsById(String id);
+
+    RawMaterial save(RawMaterial rawMaterial);
+
+    List<RawMaterial>saveMany(List<RawMaterial> rawMaterials);
+
+    RawMaterial alter(RawMaterial rawMaterial);
+
+    void deleteById(String _id);
+
+    void deleteAll();
 }
