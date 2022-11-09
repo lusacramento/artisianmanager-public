@@ -3,7 +3,6 @@ package br.com.artisianmanager.artisianmanager.controller;
 import br.com.artisianmanager.artisianmanager.domain.exception.NotFoundException;
 import br.com.artisianmanager.artisianmanager.model.entity.Unit;
 import br.com.artisianmanager.artisianmanager.service.UnitService;
-import br.com.artisianmanager.artisianmanager.service.UtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +19,6 @@ public class UnitController {
     @Autowired
     private UnitService unitService;
 
-    @Autowired
-    private UtilsService utilsService;
-
     @GetMapping
      public List<Unit> findAll(){
         return this.unitService.findAll();
@@ -31,7 +27,7 @@ public class UnitController {
     @GetMapping(value = "/{_id}")
     public ResponseEntity<Unit> findById(@PathVariable("_id")String _id){
          return this.unitService.findById(_id)
-                 .map((ResponseEntity::ok))
+                 .map(ResponseEntity::ok)
                  .orElse(ResponseEntity.notFound().build());
     }
 
@@ -64,7 +60,6 @@ public class UnitController {
     }
 
     @DeleteMapping("/{_id}")
-    @ResponseBody
     public ResponseEntity<Void> deleteById(@PathVariable String _id){
         if(!unitService.existsById(_id))
             throw new NotFoundException("Unidade não encontrada! Contacte o suporte.");
