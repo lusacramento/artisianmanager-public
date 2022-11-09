@@ -8,13 +8,21 @@ import java.util.Optional;
 
 @Service
 public interface RecipeService {
-    public List<Recipe> findAll();
+    List<Recipe> findAll();
+
+    Optional<Recipe> findById(String _id);
+
+    Recipe findByName(String name, Recipe recipe);
+
+    boolean existsById(String id);
 
     Recipe save(Recipe recipe);
 
-    public boolean deleteById(String _id);
+    List<Recipe> saveMany(List<Recipe> recipes);
 
-    Optional<Recipe> findById(String id);
+    Recipe alter(Recipe recipe);
 
-    boolean existsById(String id);
+    void deleteById(String _id);
+
+    void deleteAll();
 }
