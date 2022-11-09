@@ -5,9 +5,11 @@
       <input
         id="unit-name"
         v-model="name"
-        required
         type="text"
         class="form-control"
+        minlength="1"
+        maxlength="20"
+        required
       />
     </div>
     <div class="mb-3">
@@ -15,9 +17,11 @@
       <input
         id="unit-symbol"
         v-model="symbol"
-        required
-        type="text"
         class="form-control"
+        type="text"
+        minlength="1"
+        maxlength="6"
+        required
       />
     </div>
     <div class="mb-3">

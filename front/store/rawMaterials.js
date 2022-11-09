@@ -15,6 +15,10 @@ export const mutations = {
     state.rawMaterials = value
   },
 
+  pushRawMaterial(state, value) {
+    state.rawMaterials.push(value)
+  },
+
   setRawMaterial(state, value) {
     state.rawMaterial = value
   },
@@ -40,33 +44,29 @@ export const mutations = {
 export const actions = {
   // Database Operations
   async getRawMaterials({ state, commit }) {
-    const response = await this.$axios.$get(
-      'http://localhost:8080/api/raw-materials/'
-    )
-    commit('setRawMaterials', response)
+    if (state.rawMaterials.length === 0) {
+      const response = await this.$axios.$get(
+        'http://localhost:8080/api/raw-materials/'
+      )
+      commit('setRawMaterials', response)
+    }
   },
 
   async postRawMaterial({ state, commit }) {
-    if (
-      state.rawMaterial.name !== '' &&
-      state.rawMaterial.description !== '' &&
-      state.rawMaterial.unit !== '' &&
-      state.rawMaterial.unit !== '0'
-    ) {
-      await this.$axios.$post(
-        'http://localhost:8080/api/raw-materials/insert',
-        state.rawMaterial
-      )
-    } else await alert('Dados inválidos')
+    await this.$axios.$post(
+      'http://localhost:8080/api/raw-materials/insert',
+      state.rawMaterial
+    )
+
+    commit('pushRawMaterial', state.rawMaterial)
   },
 
   async deleteRawMaterial({ state, commit }, data) {
-    const isDeleted = await this.$axios.$delete(
-      `http://localhost:8080/api/raw-materials/delete?_id=${data.rawMaterial._id}`
+    await this.$axios.$delete(
+      `http://localhost:8080/api/raw-materials/${data.rawMaterial._id}`
     )
-    isDeleted
-      ? commit('deleteRawMaterial', data.position)
-      : alert('Erro ao apagar dado')
+
+    commit('deleteRawMaterial', data.position)
   },
 
   setRawMaterial({ state, commit }, value) {

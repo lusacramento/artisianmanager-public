@@ -20,11 +20,6 @@ import FormUnit from '~/components/unit/FormUnit.vue'
 export default {
   name: 'UnitPage',
   components: { FormUnit, TableUnit },
-  data() {
-    return {
-      count: 0,
-    }
-  },
 
   created() {
     // Get database.
