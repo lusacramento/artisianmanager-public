@@ -1,65 +1,83 @@
 package br.com.artisianmanager.artisianmanager.controller;
 
+import br.com.artisianmanager.artisianmanager.domain.exception.NotFoundException;
 import br.com.artisianmanager.artisianmanager.model.entity.Unit;
 import br.com.artisianmanager.artisianmanager.service.UnitService;
-import br.com.artisianmanager.artisianmanager.service.UtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
+@RequestMapping("/api/units")
 public class UnitController {
 
     @Autowired
     private UnitService unitService;
 
-    @Autowired
-    private UtilsService utilsService;
-
-    @GetMapping("/api/units")
+    @GetMapping
      public List<Unit> findAll(){
         return this.unitService.findAll();
     }
 
-    @RequestMapping(value = "/api/units/{_id}", method = RequestMethod.GET)
-    public Optional<Unit> findById(@PathVariable("_id")String _id){
-         return this.unitService.findById(_id);
+    @GetMapping(value = "/{_id}")
+    public ResponseEntity<Unit> findById(@PathVariable("_id")String _id){
+         return this.unitService.findById(_id)
+                 .map(ResponseEntity::ok)
+                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("api/units")
-    public Unit save(@RequestBody Unit unit){
-         // Validations
-         if(this.utilsService.verifyNullField(unit.getName()) || this.utilsService.verifyNullField(unit.getSymbol())){
-             return null;
-         }
-         else {
-
-             // verify if exists id
-             boolean isExistUnit = false;
-             if (unit.get_id() != null) {
-                 isExistUnit = this.unitService.existsById(unit.get_id());
-             }
-
-             // Case exist the id, don't set new date in the register date
-             if (isExistUnit) {
-                 unit.setRegisterDate(this.unitService.findById(unit.get_id()).orElse(null).getRegisterDate());
-
-             } else {
-                 unit.setRegisterDate(this.utilsService.getDate());
-             }
-
-             unit.setUpdateDate(this.utilsService.getDate());
-
-             return this.unitService.save(unit);
-         }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Unit save(@RequestBody @Valid Unit unit){
+        return this.unitService.save(unit);
     }
 
-    @DeleteMapping("/api/units/{_id}")
-    @ResponseBody
-    public boolean deleteById(@PathVariable String _id){
-         return this.unitService.deleteById(_id);
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/add-all/{token}")
+    public List<Unit> saveMany(@PathVariable String token, @Valid @RequestBody List<Unit> units) {
+        String validPwd = "123";
+        if(token.equals(validPwd)){
+            return this.unitService.saveMany(units);
+        }
+
+        return null;
+    }
+
+    @PutMapping("/{_id}")
+    public ResponseEntity<Unit> alter(@Valid @PathVariable String _id, @RequestBody @Valid Unit unit){
+        if(!unitService.existsById(_id)) {
+            throw new NotFoundException("Dado não encontrado");
+        }
+
+        unit.set_id(_id);
+        unitService.alter(unit);
+        return ResponseEntity.ok(unit);
+    }
+
+    @DeleteMapping("/{_id}")
+    public ResponseEntity<Void> deleteById(@PathVariable String _id){
+        if(!unitService.existsById(_id))
+            throw new NotFoundException("Unidade não encontrada! Contacte o suporte.");
+
+        unitService.deleteById(_id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/delete-all/{token}")
+    public ResponseEntity<Void> deleteAll(@PathVariable String token){
+        String validPwd = "123";
+        if(token.equals(validPwd)) {
+            this.unitService.deleteAll();
+            return ResponseEntity.noContent().build();
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

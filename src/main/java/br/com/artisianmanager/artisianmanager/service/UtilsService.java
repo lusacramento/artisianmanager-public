@@ -2,15 +2,14 @@ package br.com.artisianmanager.artisianmanager.service;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Service
 public interface UtilsService {
 
-    public String formatDate(LocalDateTime date);
+    String getNewDate();
 
-    String getDate();
+    OffsetDateTime dateParseString(String date);
 
-    boolean verifyNullField(String string);
 }
 

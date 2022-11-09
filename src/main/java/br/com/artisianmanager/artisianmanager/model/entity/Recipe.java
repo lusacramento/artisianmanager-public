@@ -1,77 +1,52 @@
 package br.com.artisianmanager.artisianmanager.model.entity;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 @Document
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Recipe {
     @Id
+    @EqualsAndHashCode.Include
     private String _id;
+
+    @NotBlank
+    @Size(min = 1, max = 20)
     private String name;
+
+    @NotBlank
+    @Size(min = 1)
     private String instructions;
+
+    @NotNull
+    @Min(1)
     private int portions;
+
+    @NotBlank
+    @Size(min = 1, max = 6)
     private String unit;
 
+    @NotNull
+    @Min(1)
     private int time;
-    private String registerDate;
-    private String updateDate;
-    private ArrayList<Ingredient> ingredients;
 
-    // Getters ans Setters
-    public String get_id() {
-        return _id;
-    }
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getInstructions() {
-        return instructions;
-    }
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-    public int getPortions() {
-        return portions;
-    }
-    public void setPortions(int portions) {
-        this.portions = portions;
-    }
-    public String getUnit() {
-        return unit;
-    }
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-    public int getTime() {
-        return time;
-    }
-    public void setTime(int time) {
-        this.time = time;
-    }
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
-    }
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-    public String getRegisterDate() {
-        return registerDate;
-    }
-    public void setRegisterDate(String registerDate) {
-        this.registerDate = registerDate;
-    }
-    public String getUpdateDate() {
-        return updateDate;
-    }
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
+    private String registerDate;
+
+    private String updateDate;
+
+    @NotNull
+    @Valid
+    private ArrayList<Ingredient> ingredients;
 }

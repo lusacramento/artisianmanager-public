@@ -3,30 +3,19 @@ package br.com.artisianmanager.artisianmanager.service.impl;
 import br.com.artisianmanager.artisianmanager.service.UtilsService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.OffsetDateTime;
 
 @Service
 public class UtilsServiceImpl implements UtilsService {
 
-    String datePattern = "dd-MM-yyyy HH:mm:ss";
 
     @Override
-    public String formatDate(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern(datePattern)).toString();
+    public String getNewDate() {
+        return OffsetDateTime.now().toString();
     }
 
     @Override
-    public String getDate() {
-        LocalDateTime date =  LocalDateTime.now();
-        String dateString = formatDate(date);
-        return dateString;
-    }
-
-    @Override
-    public boolean verifyNullField(String string) {
-        if(string == null || string == "")
-            return true;
-        return false;
+    public OffsetDateTime dateParseString(String date) {
+        return OffsetDateTime.parse(date);
     }
 }

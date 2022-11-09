@@ -1,7 +1,8 @@
 package br.com.artisianmanager.artisianmanager.controller;
 
-import br.com.artisianmanager.artisianmanager.model.entity.Unit;
-import br.com.artisianmanager.artisianmanager.model.entity.UnitTest;
+import br.com.artisianmanager.artisianmanager.model.entity.RawMaterial;
+import br.com.artisianmanager.artisianmanager.model.entity.RawMaterialTest;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,30 +11,29 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-
 @SpringBootTest
 @AutoConfigureMockMvc
-class UnitControllerTest {
-
+class RawMaterialControllerTest {
+    @Autowired
+    RawMaterialController rawMaterialController;
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
     ObjectMapper objectMapper;
 
-    @Autowired
-    UnitController unitController;
+    RawMaterialTest rawMaterialTest;
 
-    UnitTest unitTest;
+    RawMaterial rawMaterial;
 
-    Unit unit;
     @BeforeEach
     void setUp() {
-        this.unitTest = new UnitTest();
+        rawMaterialTest = new RawMaterialTest();
     }
+
     @Test
     void Crud() throws Exception {
         save();
@@ -41,35 +41,35 @@ class UnitControllerTest {
         findById();
         deleteById();
     }
-
     void save()  throws Exception{
         setUp();
-        this.unit = unitTest.setUnit();
+        this.rawMaterial = rawMaterialTest.setRawMaterial();
 
-        mockMvc.perform(post("/api/units")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(this.unit)))
+        mockMvc.perform(post("/api/raw-materials")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(this.rawMaterial)))
                 .andExpect(status().isCreated());
     }
 
     void findAll() throws Exception {
-        mockMvc.perform(get("/api/units"))
+        mockMvc.perform(get("/api/raw-materials"))
                 .andExpect(status().isOk());
     }
 
     void findById() throws Exception {
-        this.unit = unitTest.setUnit();
-        String id = this.unit.get_id();
+        this.rawMaterial = rawMaterialTest.setRawMaterial();
+        String id = this.rawMaterial.get_id();
 
-        mockMvc.perform(get("/api/units/" + id))
+        mockMvc.perform(get("/api/raw-materials/" + id))
                 .andExpect(status().isOk());
     }
 
     void deleteById() throws Exception{
-        this.unit = unitTest.setUnit();
-        String id = this.unit.get_id();
-        mockMvc.perform(delete("/api/units/" + id).contentType("application/json")
+        this.rawMaterial = rawMaterialTest.setRawMaterial();
+        String id = this.rawMaterial.get_id();
+        mockMvc.perform(delete("/api/raw-materials/" + id).contentType("application/json")
                         .accept("application/json"))
                 .andExpect(status().isNoContent());
     }
+
 }

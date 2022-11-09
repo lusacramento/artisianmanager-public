@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface RawMaterialRepository extends MongoRepository<RawMaterial, String> {
+    RawMaterial queryFirstByName(String name, RawMaterial rawMaterial);
 }
