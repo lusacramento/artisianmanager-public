@@ -62,7 +62,6 @@ public class UnitServiceImpl implements UnitService {
     public List<Unit> saveMany(List<Unit> units) {
         units.forEach(unit -> {
             if (findByName(unit.getName(),unit) != null) {
-                System.out.println("Já existe");
                 throw new BadRequestException("Já existe unidade com o nome: " + unit.getName().toUpperCase() + ".");
             } else {
                 unit.setRegisterDate(utilsService.getNewDate());
