@@ -28,40 +28,51 @@ class RecipeControllerTest {
     ObjectMapper objectMapper;
 
     RecipeTest recipeTest;
+
+    Recipe recipe;
+
     @BeforeEach
     void setUp() {
         recipeTest = new RecipeTest();
     }
 
     @Test
+    void Crud() throws Exception {
+        save();
+        findAll();
+        findById();
+        deleteById();
+    }
+
+    void save() throws Exception {
+        setUp();
+        this.recipe = recipeTest.setRecipe();
+
+        mockMvc.perform(post("/api/recipes")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(recipe)))
+                .andExpect(status().isCreated());
+    }
+
     void findAll() throws Exception {
         mockMvc.perform(get("/api/recipes"))
         .andExpect(status().isOk());
     }
 
-    @Test
     void findById() throws Exception {
-        String id = "634db0504963f301dee1bd6c";
+        this.recipe = recipeTest.setRecipe();
+        String id = this.recipe.get_id();
         mockMvc.perform(get("/api/recipes/" + id))
                 .andExpect(status().isOk());
     }
-    @Test
-    void save() throws Exception {
-        setUp();
-        Recipe recipe = recipeTest.setRecipe();
-        mockMvc.perform(post("/api/recipes")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(recipe)))
-                .andExpect(status().isOk());
 
-    }
 
-    @Test
     void deleteById() throws Exception {
-        String id = "111";
+        this.recipe = recipeTest.setRecipe();
+        String id = recipe.get_id();
         mockMvc.perform(delete("/api/recipes/" + id)
                 .contentType("application/json")
                 .accept("application/json"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 }
