@@ -42,7 +42,6 @@ class UnitControllerTest {
         deleteById();
     }
 
-    @Test
     void save()  throws Exception{
         setUp();
         this.unit = unitTest.setUnit();
