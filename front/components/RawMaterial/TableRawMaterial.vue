@@ -18,7 +18,7 @@
       <tr v-for="(data, index) in rawMaterials" :key="data._id">
         <td class="text-center">{{ data.name }}</td>
         <td class="text-center">{{ data.description }}</td>
-        <td class="text-center">{{ data.unit }}</td>
+        <td class="text-center">{{ data.unit }}.</td>
 
         <td class="text-center">
           <button
