@@ -53,12 +53,10 @@ export default {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'multipart/form-data',
     },
-    delete: {},
     get: {},
-    head: {},
     post: {},
     put: {},
-    patch: {},
+    delete: {},
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
