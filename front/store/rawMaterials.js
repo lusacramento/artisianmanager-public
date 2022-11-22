@@ -56,13 +56,22 @@ export const actions = {
     }
   },
 
-  async postRawMaterial({ state, commit }) {
-    await this.$axios.$post(
-      'http://localhost:8080/api/raw-materials/insert',
-      state.rawMaterial
-    )
-
-    commit('pushRawMaterial', state.rawMaterial)
+  async send({ state, commit }) {
+    if (state.rawMaterial._id === '') {
+      await commit('clearId')
+      await this.$axios.$post(
+        'http://localhost:8080/api/raw-materials/',
+        state.rawMaterial
+      )
+      commit('pushRawMaterial', state.rawMaterial)
+    } else {
+      const id = state.rawMaterial._id
+      await commit('clearId')
+      await this.$axios.$put(
+        `http://localhost:8080/api/raw-materials/${id}`,
+        state.rawMaterial
+      )
+    }
   },
 
   async deleteRawMaterial({ state, commit }, data) {
@@ -88,29 +97,4 @@ export const actions = {
   setUnit({ state, commit }, value) {
     commit('setUnit', value)
   },
-
-  //   async deleteRawMaterial({ state, commit }, data) {
-  //     const isDeleted = await this.$axios.$delete(
-  //       `http://localhost:8080/api/units/delete?_id=${data.rawMaterial._id}`
-  //     )
-  //     isDeleted
-  //       ? commit('deleteRawMaterial', data.position)
-  //       : alert('Erro ao apagar dado')
-  //   },
-
-  // Store operations
-  //   setRawMaterials({ state, commit }, rawMaterials) {
-  //     commit('setRawMaterials', rawMaterials)
-  //   },
-
-  //   setRawMaterial({ state, commit }, rawMaterial) {
-  //     commit('setRawMaterial', rawMaterial)
-  //   },
-
-  //   setName({ state, commit }, name) {
-  //     commit('setName', name)
-  //   },
-  //   setDescription({ state, commit }, description) {
-  //     commit('setDescription', description)
-  //   },
 }

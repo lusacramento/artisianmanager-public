@@ -113,17 +113,27 @@ export const actions = {
     commit('removeIngredient', value)
   },
 
-  async postRecipe({ state, commit }) {
-    await this.$axios.$post(
-      'http://localhost:8080/api/recipes/insert',
-      state.recipe
-    )
-    // } else await alert('Dados inválidos')
+  async send({ state, commit }) {
+    if (state.recipe._id === '') {
+      await commit('clearId')
+      await this.$axios.$post(
+        'http://localhost:8080/api/recipes/',
+        state.recipe
+      )
+      commit('pushRecipe', state.recipe)
+    } else {
+      const id = state.recipe._id
+      await commit('clearId')
+      await this.$axios.$put(
+        `http://localhost:8080/api/recipes/${id}`,
+        state.recipe
+      )
+    }
   },
 
   async deleteRecipe({ state, commit }, data) {
     const isDeleted = await this.$axios.$delete(
-      `http://localhost:8080/api/recipes/delete?_id=${data.recipe._id}`
+      `http://localhost:8080/api/recipes/${data.recipe._id}`
     )
     isDeleted
       ? commit('deleteRecipe', data.position)
