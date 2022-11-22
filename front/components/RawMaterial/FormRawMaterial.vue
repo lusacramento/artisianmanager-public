@@ -25,7 +25,7 @@
       <button
         type="submit"
         class="btn btn-send justify-content-center"
-        @click="insertRawMaterial"
+        @click="send"
       >
         Enviar
       </button>
@@ -57,8 +57,8 @@ export default {
     },
   },
   methods: {
-    insertRawMaterial() {
-      this.$store.dispatch('rawMaterials/postRawMaterial')
+    send() {
+      this.$store.dispatch('rawMaterials/send')
     },
   },
 }

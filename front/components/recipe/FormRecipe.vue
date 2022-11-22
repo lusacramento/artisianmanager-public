@@ -63,7 +63,7 @@
         <button
           type="submit"
           class="btn btn-send justify-content-center"
-          @click="insertRecipe"
+          @click="send"
         >
           Enviar
         </button>
@@ -122,8 +122,8 @@ export default {
   },
 
   methods: {
-    insertRecipe() {
-      this.$store.dispatch('recipes/postRecipe')
+    send() {
+      this.$store.dispatch('recipes/send')
     },
   },
 }

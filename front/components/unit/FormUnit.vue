@@ -28,7 +28,7 @@
       <button
         type="submit"
         class="btn btn-send justify-content-center"
-        @click="insertUnit"
+        @click="send"
       >
         Enviar
       </button>
@@ -61,8 +61,8 @@ export default {
   },
 
   methods: {
-    insertUnit() {
-      this.$store.dispatch('units/postUnit')
+    send() {
+      this.$store.dispatch('units/send')
     },
   },
 }
