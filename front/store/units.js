@@ -2,7 +2,7 @@
 export const state = () => ({
   units: [],
   unit: {
-    id: '',
+    _id: '',
     name: '',
     symbol: '',
     registerDate: '',

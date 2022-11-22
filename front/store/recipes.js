@@ -2,7 +2,7 @@
 export const state = () => ({
   recipes: [],
   recipe: {
-    id: '',
+    _id: '',
     name: '',
     time: '',
     instructions: '',

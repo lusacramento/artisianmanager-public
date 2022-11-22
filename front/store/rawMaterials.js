@@ -2,7 +2,7 @@
 export const state = () => ({
   rawMaterials: [],
   rawMaterial: {
-    id: '',
+    _id: '',
     name: '',
     description: '',
     unit: '',
