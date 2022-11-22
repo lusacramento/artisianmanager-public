@@ -34,6 +34,10 @@ export const mutations = {
   deleteUnit(state, position) {
     state.units.splice(position, 1)
   },
+
+  clearId(state) {
+    state.unit._id = null
+  },
 }
 
 // Actions

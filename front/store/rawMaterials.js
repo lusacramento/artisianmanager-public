@@ -38,6 +38,10 @@ export const mutations = {
   deleteRawMaterial(state, position) {
     state.rawMaterials.splice(position, 1)
   },
+
+  clearId(state) {
+    state.rawMaterial._id = null
+  },
 }
 
 // Actions

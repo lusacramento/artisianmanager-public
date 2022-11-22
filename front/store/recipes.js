@@ -61,6 +61,10 @@ export const mutations = {
   deleteRecipe(state, position) {
     state.recipes.splice(position, 1)
   },
+
+  clearId(state) {
+    state.recipe._id = null
+  },
 }
 
 // Actions
