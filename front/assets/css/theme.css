@@ -52,6 +52,14 @@ td {
   background-color: var(--secondary-color-100) !important;
 }
 
+.btn-send:hover {
+  background-color: transparent !important;
+}
+
+.btn-clear {
+  background-color: var(--white-color-50);
+}
+
 input,
 textarea {
   background-color: transparent !important;

@@ -67,6 +67,13 @@
         >
           Enviar
         </button>
+        <button
+          type="reset"
+          class="btn btn-clear justify-content-center"
+          @click="clear"
+        >
+          Limpar
+        </button>
       </div>
     </div>
   </form>
@@ -124,6 +131,10 @@ export default {
   methods: {
     send() {
       this.$store.dispatch('recipes/send')
+    },
+
+    clear() {
+      window.location.reload()
     },
   },
 }
