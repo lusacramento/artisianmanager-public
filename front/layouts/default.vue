@@ -6,9 +6,9 @@
     <main id="main" class="router-view">
       <Nuxt />
     </main>
-    <div id="footer">
+    <footer id="footer" class="footer fixed-bottom">
       <Footer />
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -26,16 +26,10 @@ export default {
 }
 </script>
 <style>
-@media (min-width: 991.98px) {
-  div.app {
-    grid-template-rows: 17vh 1fr 11vh;
-  }
-  /* .layer-top-exercise {
-      height: 42vh !important;
-    } */
-}
-div.app {
+#app {
   display: grid;
+  height: 99vh !important;
+  grid-template-rows: 20vh 70vh 11vh;
 
   grid-template-areas:
     'nav'
