@@ -9,7 +9,6 @@
         <div class="col-12 col-lg-8">
           <RawMaterialTable />
         </div>
-        >
       </div>
     </div>
   </div>
