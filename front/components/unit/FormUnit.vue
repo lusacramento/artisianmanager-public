@@ -24,13 +24,20 @@
         required
       />
     </div>
-    <div class="mb-3">
+    <div class="mb-3 text-center">
       <button
         type="submit"
         class="btn btn-send justify-content-center"
-        @click="insertUnit"
+        @click="send"
       >
         Enviar
+      </button>
+      <button
+        type="reset"
+        class="btn btn-clear justify-content-center"
+        @click="clear"
+      >
+        Limpar
       </button>
     </div>
   </form>
@@ -61,8 +68,12 @@ export default {
   },
 
   methods: {
-    insertUnit() {
-      this.$store.dispatch('units/postUnit')
+    send() {
+      this.$store.dispatch('units/send')
+    },
+
+    clear() {
+      window.location.reload()
     },
   },
 }

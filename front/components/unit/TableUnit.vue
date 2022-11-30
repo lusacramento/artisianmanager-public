@@ -16,7 +16,7 @@
     <tbody>
       <tr v-for="(data, index) in units" :key="data._id">
         <td class="text-center">{{ data.name }}</td>
-        <td class="text-center">{{ data.symbol }}</td>
+        <td class="text-center">{{ data.symbol }}.</td>
         <td class="text-center">
           <button
             class="btn btn-alter btn-sm justify-content-center"

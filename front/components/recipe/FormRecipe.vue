@@ -63,9 +63,16 @@
         <button
           type="submit"
           class="btn btn-send justify-content-center"
-          @click="insertRecipe"
+          @click="send"
         >
           Enviar
+        </button>
+        <button
+          type="reset"
+          class="btn btn-clear justify-content-center"
+          @click="clear"
+        >
+          Limpar
         </button>
       </div>
     </div>
@@ -122,8 +129,12 @@ export default {
   },
 
   methods: {
-    insertRecipe() {
-      this.$store.dispatch('recipes/postRecipe')
+    send() {
+      this.$store.dispatch('recipes/send')
+    },
+
+    clear() {
+      window.location.reload()
     },
   },
 }

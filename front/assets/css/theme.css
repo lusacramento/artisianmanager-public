@@ -1,6 +1,12 @@
 :root {
   --background-color: #061e34;
 
+  --background-color-degraded: linear-gradient(
+    180deg,
+    rgba(6, 30, 52, 1) 35%,
+    rgb(35, 84, 129) 100%
+  );
+
   --primary-color-100: rgba(255, 193, 0, 1);
   --primary-color-80: rgba(255, 193, 0, 0.8);
 
@@ -16,7 +22,7 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background: var(--background-color-degraded);
   color: var(--white-color-80);
 }
 
@@ -50,6 +56,14 @@ td {
 
 .btn-send {
   background-color: var(--secondary-color-100) !important;
+}
+
+.btn-send:hover {
+  background-color: transparent !important;
+}
+
+.btn-clear {
+  background-color: var(--white-color-50);
 }
 
 input,

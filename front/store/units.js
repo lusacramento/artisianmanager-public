@@ -2,7 +2,7 @@
 export const state = () => ({
   units: [],
   unit: {
-    id: '',
+    _id: '',
     name: '',
     symbol: '',
     registerDate: '',
@@ -34,6 +34,10 @@ export const mutations = {
   deleteUnit(state, position) {
     state.units.splice(position, 1)
   },
+
+  clearId(state) {
+    state.unit._id = null
+  },
 }
 
 // Actions
@@ -48,18 +52,28 @@ export const actions = {
     }
   },
 
-  async postUnit({ state, commit }) {
-    await this.$axios.post('http://localhost:8080/api/units/', state.unit)
-
-    commit('pushUnit', state.unit)
-  },
-
   async deleteUnit({ state, commit }, data) {
     await this.$axios.$delete(
       `http://localhost:8080/api/units/${data.unit._id}`
     )
 
     commit('deleteUnit', data.position)
+  },
+
+  async send({ state, commit }) {
+    if (state.unit._id === '') {
+      await commit('clearId')
+      await this.$axios.$post('http://localhost:8080/api/units/', state.unit)
+      commit('pushUnit', state.unit)
+    } else {
+      const id = state.unit._id
+
+      await commit('clearId')
+      await this.$axios.$put(
+        `http://localhost:8080/api/units/${id}`,
+        state.unit
+      )
+    }
   },
 
   // Store operations
